@@ -16,7 +16,7 @@ const { Otp } = require('../models');
 const loginUserWithEmailAndPassword = async (email) => {
   const user = await userService.getUserByEmail(email);
   if (!user) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid email address. Please check and try again!');
   };
   const emailSentCode = await emailService.sendVerificationEmail(email);
   const otpObject = {

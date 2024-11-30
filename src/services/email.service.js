@@ -73,10 +73,10 @@ const verifyOtp = async (otp, email) => {
   });
 
   if (!isOtpValid) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'No users found with this email');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Please provide correct otp!');
   }
 
-  if (new Date().getTime() > new Date(isOtpValid.lastOtpSentTime).getTime() + 1 * 60 * 1000) {
+  if (new Date().getTime() > new Date(isOtpValid.lastOtpSentTime).getTime() + 10 * 60 * 1000) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Otp Expired!');
   }
 

@@ -3,16 +3,18 @@ const { User, Otp } = require('../models');
 const ApiError = require('../utils/ApiError');
 const logger = require('../config/logger');
 const emailService  = require('./email.service');
+const catchAsync = require('../utils/catchAsync');
 
 const createUser = async (userBody) => {
   logger.info(`userBody data ======> ${JSON.stringify(userBody)}`);
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
-  }
+  };
   if (await User.isPhoneNumberTaken(userBody.phoneNumber)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'PhoneNumber already taken');
-  }
+  };
   const emailSentCode = await emailService.sendVerificationEmail(userBody.email);
+  console.log('emailSentCode', emailSentCode);
   const otpObject = {
     otp: emailSentCode,
     email: userBody.email,
@@ -22,6 +24,8 @@ const createUser = async (userBody) => {
     phoneNumber: userBody.phoneNumber
   };
   await Otp.create(otpObject);
+  
+  return;
 };
 
 const queryUsers = async (filter, options) => {

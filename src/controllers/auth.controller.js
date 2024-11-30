@@ -2,10 +2,14 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
 
-const register = catchAsync(async (req, res) => {
-  await userService.createUser(req.body);
-  res.status(httpStatus.CREATED).send({ success: true, message: 'otp sent successfully' });
-});
+const register = async (req, res, next) => {
+  try{
+    await userService.createUser(req.body);
+    res.status(httpStatus.CREATED).send({ success: true, message: 'otp sent successfully' });
+  }catch(err) {
+    next(err)
+  }
+};
 
 const login = catchAsync(async (req, res) => {
   const { email } = req.body;
