@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { toJSON, paginate } = require('./plugins');
+const bcrypt = require('bcrypt');
+const { password } = require('../validations/custom.validation');
 
 const userSchema = mongoose.Schema(
   {
@@ -21,11 +23,19 @@ const userSchema = mongoose.Schema(
         }
       },
     },
+    password: {
+      type: String,
+      required: true,
+    },
     phoneNumber: {
       type: String,
       required: true,
       trim: true,
     },
+    role: {
+      type: String,
+      enums: ['user', 'admin']
+    }
   },
   {
     timestamps: true,
@@ -52,7 +62,17 @@ userSchema.statics.isPhoneNumberTaken = async function (phoneNumber) {
   return !!user;
 }
 
-
+userSchema.statics.isPasswordCorrect = async function(email, password) {
+  const isEmailTaken = await this.findOne({email});
+  console.log(isEmailTaken.password)
+  if(!isEmailTaken) {
+    throw new Error('email is not taken');
+  };
+  console.log('appsoiusjs', password);
+  const isPasswordCorrect = await bcrypt.compare(password, isEmailTaken.password);
+  console.log('jhhdhghjjkd', isPasswordCorrect);
+  return !!isPasswordCorrect;
+}
 /**
  * @typedef User
  */

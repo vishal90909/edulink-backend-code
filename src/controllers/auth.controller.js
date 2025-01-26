@@ -56,6 +56,13 @@ const verifyEmail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const adminLogin = catchAsync(async (req, res) => {
+  const userData = await userService.adminLogin(req.body);
+  console.log('userData', userData.role);
+  const token = await tokenService.generateAuthTokens(userData);
+  res.status(200).send({success: true, userData, token});
+});
+
 module.exports = {
   register,
   login,
@@ -66,4 +73,5 @@ module.exports = {
   sendVerificationEmail,
   verifyEmail,
   verifyOtp,
+  adminLogin
 };

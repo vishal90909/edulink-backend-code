@@ -16,4 +16,8 @@ router.post('/send-verification-email', auth(), authController.sendVerificationE
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
 router.get('/verify-otp', validate(authValidation.verifyOtp), authController.verifyOtp);
 
+//login for admin panel
+router.post('/login-admin', authController.adminLogin);
+
+
 module.exports = router;

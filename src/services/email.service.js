@@ -85,7 +85,8 @@ const verifyOtp = async (otp, email) => {
     return User.create({
       name: isOtpValid.name,
       email,
-      phoneNumber: isOtpValid.phoneNumber
+      phoneNumber: isOtpValid.phoneNumber,
+      role: 'user'
     })
   }else {
     return User.findOne({email});
