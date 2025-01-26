@@ -5,8 +5,8 @@ const addChat = async(user) => {
   return addChat;
 };
 
-const fetchChat = async(id) => {
-  const fetchChat = await chatModel.find({userId: id});
+const fetchChat = async(query) => {
+  const fetchChat = await chatModel.find({userId: query.id});
   return fetchChat;
 };
 
@@ -15,8 +15,8 @@ const addCarrer =  async(carrerPathData) => {
   return addUserCarrerData;
 };
 
-const fetchCarrerDetails = async(id) => {
-  const fetchCarrerDetails = await carrerPathWayModel.find({userId: id});
+const fetchCarrerDetails = async(query) => {
+  const fetchCarrerDetails = await carrerPathWayModel.find({userId: query.id});
   return fetchCarrerDetails;
 };
 
@@ -25,8 +25,8 @@ const addVisaQueryData = async(visaQueryData) => {
   return addVisaQueryData;
 };
 
-const fetchUserVisaQuery = async(id) => {
-  const fetchCarrerDetails = await visaQueryModel.find({userId: id});
+const fetchUserVisaQuery = async(query) => {
+  const fetchCarrerDetails = await visaQueryModel.find({userId: query.id});
   return fetchCarrerDetails;
 };
 
@@ -35,8 +35,8 @@ const addUniversityAssesment = async(assesmentData) => {
   return addUniversityAssesment;
 };
 
-const fetchUserUniversityAssesment = async(id) => {
-  const fetchUserUniversityAssesment = await universityAssesmentModel.find({userId: id});
+const fetchUserUniversityAssesment = async(query) => {
+  const fetchUserUniversityAssesment = await universityAssesmentModel.find({userId: query.id});
   return fetchUserUniversityAssesment;
 };
 
