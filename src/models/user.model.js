@@ -34,6 +34,22 @@ const userSchema = mongoose.Schema(
     role: {
       type: String,
       enums: ['user', 'admin']
+    },
+    isChatBotUsed: {
+      type: Boolean,
+      default: false
+    },
+    isCarrerPathwayAssesmentUsed: {
+      type: Boolean,
+      default: false
+    },
+    isUniversityAssesmentUsed: {
+      type: Boolean,
+      default: false
+    },
+    isVisaQueryAssesmentUsed: {
+      type: Boolean,
+      default: false
     }
   },
   {

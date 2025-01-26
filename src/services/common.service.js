@@ -2,6 +2,7 @@ const { chatModel, carrerPathWayModel, visaQueryModel, universityAssesmentModel 
 
 const addChat = async(user) => {
   const addChat = await chatModel.create(user);
+  await userModel.findOneAndUpdate({_id: user.userId}, {isChatBotUsed: true}, {new: true})
   return addChat;
 };
 
@@ -12,6 +13,8 @@ const fetchChat = async(query) => {
 
 const addCarrer =  async(carrerPathData) => {
   const addUserCarrerData = await carrerPathWayModel.create(carrerPathData);
+  await userModel.findOneAndUpdate({_id: user.userId}, {isCarrerPathwayAssesmentUsed: true}, {new: true})
+
   return addUserCarrerData;
 };
 
@@ -22,6 +25,8 @@ const fetchCarrerDetails = async(query) => {
 
 const addVisaQueryData = async(visaQueryData) => {
   const addVisaQueryData = await visaQueryModel.create(visaQueryData);
+  await userModel.findOneAndUpdate({_id: user.userId}, {isVisaQueryAssesmentUsed: true}, {new: true})
+
   return addVisaQueryData;
 };
 
@@ -32,6 +37,8 @@ const fetchUserVisaQuery = async(query) => {
 
 const addUniversityAssesment = async(assesmentData) => {
   const addUniversityAssesment = await universityAssesmentModel.create(assesmentData);
+  await userModel.findOneAndUpdate({_id: user.userId}, {isUniversityAssesmentUsed: true}, {new: true})
+
   return addUniversityAssesment;
 };
 
