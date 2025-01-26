@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { toJSON, paginate } = require('./plugins');
 const bcrypt = require('bcrypt');
-const { password } = require('../validations/custom.validation');
 
 const userSchema = mongoose.Schema(
   {
