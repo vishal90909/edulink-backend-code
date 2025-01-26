@@ -7,6 +7,6 @@ const userController = require('../../controllers/user.controller');
 const router = express.Router();
 
 router.get('/', auth('users'),  userController.fetchUser);
-router.get('/user/:id', auth('userById'), userController.fetchUserById);
+router.get('/:id', auth('userById'), userController.fetchUserById);
 
 module.exports = router;
