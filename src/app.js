@@ -16,7 +16,8 @@ const ApiError = require('./utils/ApiError');
 const path = require('path');
 const app = express();
 
-
+app.use(cors());
+app.options('*', cors());
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 if (config.env !== 'test') {
@@ -41,8 +42,6 @@ app.use(mongoSanitize());
 app.use(compression());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
 
 // jwt authentication
 app.use(passport.initialize());
