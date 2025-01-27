@@ -49,15 +49,14 @@ const fetchUserUniversityAssesment = async(query) => {
 };
 
 const addNews = async(req) => {
-  console.log('req.body', req.body);
-  const image = req.file.originalname;
-  console.log('req.body12', image);
+  const image = req.file.filename;
   const newsData = await newsModel.create({...req.body, image});
   return newsData;
 };
 
 const fetchNews = async(query) => {
   const news = await newsModel.findOne({_id: query.newsId});
+
   return news;
 };
 
