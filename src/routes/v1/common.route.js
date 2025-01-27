@@ -1,6 +1,9 @@
 const express = require('express');
 const { chatController } = require('../../controllers');
 const auth = require('../../middlewares/auth');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
 
 const router = express.Router();
 
@@ -20,7 +23,7 @@ router.get('/fetchUserVisaQuery', auth('fetchUserVisaQuery'), chatController.fet
 router.post('/addUniversityAssesment', chatController.addUniversityAssesment);
 router.get('/fetchUniversityAssesment', auth('fetchUniversityAssesment'), chatController.fetchUniversityAssesment);
 
-router.post('/addNews', auth('addNews'), chatController.addNews);
+router.post('/addNews', auth('addNews'), upload.single('image'), chatController.addNews);
 router.get('/fetchNews', auth('fetchNews'), chatController.fetchNews);
 
 module.exports = router;

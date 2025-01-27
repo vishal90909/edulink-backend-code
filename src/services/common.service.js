@@ -48,8 +48,11 @@ const fetchUserUniversityAssesment = async(query) => {
   return fetchUserUniversityAssesment;
 };
 
-const addNews = async(news) => {
-  const newsData = await newsModel.create(news);
+const addNews = async(req) => {
+  console.log('req.body', req.body);
+  const image = req.file.originalname;
+  console.log('req.body12', image);
+  const newsData = await newsModel.create({...req.body, image});
   return newsData;
 };
 

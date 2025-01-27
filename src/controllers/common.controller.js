@@ -46,7 +46,8 @@ const fetchUniversityAssesment = catchAsync(async(req,res) => {
 });
 
 const addNews = catchAsync(async(req,res) => {
-  const news = await commonService.addNews(req.body);
+  console.log('req.body', req.file);
+  const news = await commonService.addNews(req);
   res.status(httpStatus.OK).send({success: true, news});
 });
 
