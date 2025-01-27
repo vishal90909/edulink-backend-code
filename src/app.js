@@ -16,9 +16,19 @@ const ApiError = require('./utils/ApiError');
 const path = require('path');
 const app = express();
 
-app.use(cors());
-app.options('*', cors());
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+app.get("/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, "tmp", filename);
+
+  // Check if file exists
+  if (fs.existsSync(filePath)) {
+    res.download(filePath); // Serve the file for download
+  } else {
+    res.status(404).send({ message: "File not found!" });
+  }
+});
+
 
 if (config.env !== 'test') {
   app.use(morgan.successHandler);
@@ -42,6 +52,8 @@ app.use(mongoSanitize());
 app.use(compression());
 
 // enable cors
+app.use(cors());
+app.options('*', cors());
 
 // jwt authentication
 app.use(passport.initialize());
