@@ -1,4 +1,4 @@
-const { chatModel, carrerPathWayModel, visaQueryModel, universityAssesmentModel, User } = require("../models")
+const { chatModel, carrerPathWayModel, visaQueryModel, universityAssesmentModel, User, newsModel } = require("../models")
 
 const addChat = async(user) => {
   console.log('user12', user);
@@ -48,6 +48,15 @@ const fetchUserUniversityAssesment = async(query) => {
   return fetchUserUniversityAssesment;
 };
 
+const addNews = async(news) => {
+  const newsData = await newsModel.create(news);
+  return newsData;
+};
+
+const fetchNews = async(query) => {
+  const news = await newsModel.findOne({_id: query.newsId});
+  return news;
+};
 
 module.exports = {
   addChat,
@@ -57,5 +66,7 @@ module.exports = {
   addVisaQueryData,
   fetchUserVisaQuery,
   addUniversityAssesment,
-  fetchUserUniversityAssesment
+  fetchUserUniversityAssesment,
+  addNews,
+  fetchNews
 };

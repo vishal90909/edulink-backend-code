@@ -20,4 +20,7 @@ router.get('/fetchUserVisaQuery', auth('fetchUserVisaQuery'), chatController.fet
 router.post('/addUniversityAssesment', chatController.addUniversityAssesment);
 router.get('/fetchUniversityAssesment', auth('fetchUniversityAssesment'), chatController.fetchUniversityAssesment);
 
+router.post('/addNews', auth('addNews'), chatController.addNews);
+router.get('/fetchNews', auth('fetchNews'), chatController.fetchNews);
+
 module.exports = router;
