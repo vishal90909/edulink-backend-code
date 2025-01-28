@@ -2,8 +2,27 @@ const express = require('express');
 const { chatController } = require('../../controllers');
 const auth = require('../../middlewares/auth');
 const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-const upload = multer({ dest: 'temp/' });
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'dw2jpw0jt',
+  api_key: '299723729445816',
+  api_secret: 'd2ss2hEYXt-ZYR5xa0GGGIfALDI'
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads', // Name of the folder in Cloudinary
+    format: async (req, file) => 'jpg', // Set file format (optional)
+    public_id: (req, file) => file.originalname.split('.')[0], // Set file name
+  },
+});
+
+// Set up multer
+const upload = multer({ storage });
 
 const router = express.Router();
 

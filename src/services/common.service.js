@@ -56,12 +56,7 @@ const fetchUserUniversityAssesment = async (query) => {
 };
 
 const addNews = async (req) => {
-  const image = req.file.filename;
-  const result = await cloudinary.uploader.upload(req.file.path, {
-    folder: 'edulink-image'
-  });
-  fs.unlinkSync(req.file.path);
-  const newsData = await newsModel.create({ ...req.body, image: result.secure_url });
+  const newsData = await newsModel.create({ ...req.body, image: req.file.path });
   return newsData;
 };
 
