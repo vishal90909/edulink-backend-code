@@ -12,6 +12,11 @@ const fetchUserById = async (userId) => {
   return User.findOne({ _id: userId });
 };
 
+
+const getUserByEmail = async (email) => {
+  return User.findOne({ email });
+};
+
 const adminLogin = async (userBody) => {
   console.log(userBody);
   if (!await User.isEmailTaken(userBody.email)) {
@@ -28,5 +33,6 @@ const adminLogin = async (userBody) => {
 module.exports = {
   fetchUser,
   fetchUserById,
-  adminLogin
+  adminLogin,
+  getUserByEmail
 };
