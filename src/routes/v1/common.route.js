@@ -3,16 +3,8 @@ const { chatController } = require('../../controllers');
 const auth = require('../../middlewares/auth');
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, '/tmp'); // Save files to the `/tmp` directory
-    },
-    filename: (req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-  });
-  
-const upload = multer({ storage });
+const upload = multer({ dest: 'temp/' });
+
 const router = express.Router();
 
 // bot api
