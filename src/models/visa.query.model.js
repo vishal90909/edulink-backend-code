@@ -21,6 +21,10 @@ const visaQuerySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  content: {
+    type: String,
+    required: true
+  },
   percentageChance: {
     type: Number,
     required: true
