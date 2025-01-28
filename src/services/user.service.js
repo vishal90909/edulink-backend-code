@@ -22,6 +22,10 @@ const adminLogin = async (userBody) => {
   if (!await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.status.BAD_REQUEST, 'email does not match');
   };
+  const userData = await User.findOne({email: userBody.email})
+  if(userData.role !== 'admin') {
+    throw new ApiError(400, 'user should be admin');
+  }
 
   if (!await User.isPasswordCorrect(userBody.email, userBody.password)) {
     throw new ApiError(httpStatus.status.BAD_REQUEST, 'password does not match');
