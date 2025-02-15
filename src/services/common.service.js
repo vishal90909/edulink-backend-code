@@ -66,6 +66,13 @@ const fetchNews = async (query) => {
   return news;
 };
 
+const fetchNewsDetails = async (query) => {
+  const news = await newsModel.find();
+  console.log('news12', news);
+  return news;
+};
+
+
 module.exports = {
   addChat,
   fetchChat,
@@ -76,5 +83,6 @@ module.exports = {
   addUniversityAssesment,
   fetchUserUniversityAssesment,
   addNews,
-  fetchNews
+  fetchNews,
+  fetchNewsDetails
 };

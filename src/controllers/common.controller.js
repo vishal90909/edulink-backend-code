@@ -56,6 +56,11 @@ const fetchNews = catchAsync(async(req,res) => {
   res.status(httpStatus.OK).send({success: true, news});
 });
 
+const fetchNewsDetails = catchAsync(async(req,res) => {
+  const news = await commonService.fetchNewsDetails(req.query);
+  res.status(httpStatus.OK).send({success: true, news});
+});
+
 module.exports = {
   addChat,
   fetchUserChat,
@@ -66,5 +71,6 @@ module.exports = {
   addUniversityAssesment,
   fetchUniversityAssesment,
   addNews,
-  fetchNews
+  fetchNews,
+  fetchNewsDetails,
 };

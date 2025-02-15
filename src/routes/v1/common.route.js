@@ -44,5 +44,6 @@ router.get('/fetchUniversityAssesment', auth('fetchUniversityAssesment'), chatCo
 
 router.post('/addNews', auth('addNews'), upload.single('image'), chatController.addNews);
 router.get('/fetchNews', auth('fetchNews'), chatController.fetchNews);
+router.get('/fetchNewsDetails', chatController.fetchNewsDetails);
 
 module.exports = router;
